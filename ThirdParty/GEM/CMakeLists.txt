@@ -1,6 +1,4 @@
-# Source files
-
-set( HEADERS
+set(HEADERS
 	databr.h
 	datach.h
 	gdatastream.h
@@ -12,9 +10,9 @@ set( HEADERS
 	ms_multi.h
 	node.h
 	num_methods.h
-        s_kinmet.h
+	s_kinmet.h
 	s_solmod.h
-        s_sorpmod.h
+	s_sorpmod.h
 	tnt.h
 	tnt_array1d.h
 	tnt_array2d.h
@@ -23,7 +21,7 @@ set( HEADERS
 	verror.h
 )
 
-set ( SOURCES
+set(SOURCES
 	gdatastream.cpp
 	io_arrays.cpp
 	ipm_chemical2.cpp
@@ -47,22 +45,10 @@ set ( SOURCES
 	s_sorpmod.cpp
 )
 
-# Create the library
-add_library( GEM STATIC 
-	     ${SOURCES}
-             ${HEADERS} 
-)
-include_directories(
-        ${CMAKE_SOURCE_DIR}/GEM
-)
+add_library(GEM STATIC ${SOURCES} ${HEADERS})
+#include_directories(${CMAKE_SOURCE_DIR}/GEM)
 
-
-##set_target_properties(GEM PROPERTIES LINKER_LANGUAGE CXX)
-
-if (WIN32)
-	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIPMGEMPLUGIN")
-endif ()
-
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIPMGEMPLUGIN")
 if (UNIX)
-	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIPMGEMPLUGIN -D__unix")
+	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__unix")
 endif ()
