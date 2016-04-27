@@ -63,7 +63,7 @@ module unload python
 module load openmpi/gcc/1.8.4-2
 module load petsc/3.5_maint_gcc_4.8.1-3_openmpi_gcc_1.8.2-1_gcc_4.8.1_CentOS6_envinf
 set -x
-nice -n 5 make benchmarks-short-normal-long"""
+ctest --label-regex \"short|normal|long\" --force-new-ctest-process --output-on-failure --build-config Release --parallel 10"""
 				}
 				archive '**/*.numdiff'
 			}
@@ -95,7 +95,7 @@ set -x
 ln -s /opt/ogs/ogs5-libs Libs || :
 rm -rf ${buildDir} && mkdir ${buildDir} && cd ${buildDir}
 cmake ../ogs ${cmakeOptions} -DCMAKE_BUILD_TYPE=Release
-nice -n 5 make -j 2 ${target}"""
+make -j 10 ${target}"""
 	}
 }
 
